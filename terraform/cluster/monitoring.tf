@@ -5,5 +5,5 @@ resource "helm_release" "prometheus_stack" {
 
     chart = "kube-prometheus-stack"
 
-    namespace = kubernetes_namespace.monitoring.metadata[0].name
+    namespace = kubernetes_namespace.namespaces["monitoring"].metadata[0].name
 }

@@ -1,0 +1,3 @@
+creation_rules:
+  - path_regex: '^secrets\.(yaml|json)$'
+    pgp: 'EB3C07037A5C7AE7E622D5597FE4C52C2C91DBD2'

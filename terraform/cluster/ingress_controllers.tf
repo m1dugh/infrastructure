@@ -14,7 +14,7 @@ for_each = { for ingress in local.ingress_controllers : ingress.name => ingress 
     chart = "ingress-nginx"
     name = each.key
 
-    namespace = kubernetes_namespace.ingress-controllers.metadata[0].name
+    namespace = kubernetes_namespace.namespaces["ingress-controllers"].metadata[0].name
 
     set {
       name = "controller.hostNetwork"
