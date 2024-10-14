@@ -9,6 +9,8 @@ resource "helm_release" "prometheus_stack" {
 
     namespace = kubernetes_namespace.namespaces["monitoring"].metadata[0].name
 
+    upgrade_install = true
+
     values = [yamlencode({
         grafana = {
             ingress = {
@@ -18,7 +20,7 @@ resource "helm_release" "prometheus_stack" {
                     "grafana.local.midugh.fr"
                 ]
                 annotations = {
-                    "cert-manager.io/issuer" = "midugh-cluster-issuer"
+                    "cert-manager.io/cluster-issuer" = "midugh-cluster-issuer"
                 }
                 tls = [{
                     secretName = "grafana-tls"

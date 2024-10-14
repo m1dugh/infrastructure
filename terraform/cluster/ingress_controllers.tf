@@ -1,10 +1,12 @@
 locals {
     ingress_controllers = [for v in [{
         name = "internal-ingress"
-        node = "cluster-master-3"
+        http = 31080
+        https = 31443
     }, {
         name = "external-ingress"
-        node = "cluster-master-2"
+        http = 30080
+        https = 30443
     }]: v if var.ingresses.enable]
 }
 
@@ -16,28 +18,23 @@ for_each = { for ingress in local.ingress_controllers : ingress.name => ingress 
 
     namespace = kubernetes_namespace.namespaces["ingress-controllers"].metadata[0].name
 
-    set {
-      name = "controller.hostNetwork"
-      value = "true"
-    }
+    upgrade_install = true
 
-    set {
-      name = "controller.service.enabled"
-      value = "false"
-    }
-
-    set {
-      name = "controller.hostPort.enabled"
-      value = "true"
-    }
-
-    set {
-        name = "controller.nodeSelector.kubernetes\\.io/hostname"
-        value = each.value.node
-    }
-
-    set {
-        name = "controller.ingressClassResource.name"
-        value = each.key
-    }
+    values = [yamlencode({
+        controller = {
+            electionID = "${each.key}-leader"
+            service = {
+                type = "NodePort"
+                nodePorts = {
+                    http = each.value.http
+                    https = each.value.https
+                }
+            }
+            ingressClassResource = {
+                name = each.key
+                controllerValue = "k8s.io/${each.key}-nginx"
+            }
+            ingressClass = each.key
+        }
+    })]
 }
