@@ -1,45 +1,45 @@
 variable "namespaces" {
-    type = list(string)
-    default = []
+  type    = list(string)
+  default = []
 }
 
 variable "cloudflare" {
-    type = object({
-      token = string
-    })
+  type = object({
+    token = string
+  })
 }
 
 variable "metrics_server" {
   type = object({
     enable = optional(bool, false)
   })
-  default = { }
+  default = {}
 }
 
 variable "ingresses" {
   type = object({
     enable = optional(bool, false)
   })
-  default = { }
+  default = {}
 }
 
 variable "cert_manager" {
   type = object({
     enable = optional(bool, false)
   })
-  default = { }
+  default = {}
 }
 
 variable "monitoring" {
   type = object({
     enable = optional(bool, false)
   })
-  default = { }
+  default = {}
 }
 
 variable "nfs_provisioner" {
   type = object({
     enable = optional(bool, false)
   })
-  default = { }
+  default = {}
 }

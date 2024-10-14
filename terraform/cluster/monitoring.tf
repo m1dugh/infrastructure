@@ -1,34 +1,34 @@
 resource "helm_release" "prometheus_stack" {
-    count = var.monitoring.enable ? 1 : 0
+  count = var.monitoring.enable ? 1 : 0
 
-    name = "kube-prometheus-stack"
+  name = "kube-prometheus-stack"
 
-    repository = "https://prometheus-community.github.io/helm-charts"
+  repository = "https://prometheus-community.github.io/helm-charts"
 
-    chart = "kube-prometheus-stack"
+  chart = "kube-prometheus-stack"
 
-    namespace = kubernetes_namespace.namespaces["monitoring"].metadata[0].name
+  namespace = kubernetes_namespace.namespaces["monitoring"].metadata[0].name
 
-    upgrade_install = true
+  upgrade_install = true
 
-    values = [yamlencode({
-        grafana = {
-            ingress = {
-                enabled = true
-                ingressClassName = "internal-ingress"
-                hosts = [
-                    "grafana.local.midugh.fr"
-                ]
-                annotations = {
-                    "cert-manager.io/cluster-issuer" = "midugh-cluster-issuer"
-                }
-                tls = [{
-                    secretName = "grafana-tls"
-                    hosts = [
-                        "grafana.local.midugh.fr"
-                    ]
-                }]
-            }
+  values = [yamlencode({
+    grafana = {
+      ingress = {
+        enabled          = true
+        ingressClassName = "internal-ingress"
+        hosts = [
+          "grafana.local.midugh.fr"
+        ]
+        annotations = {
+          "cert-manager.io/cluster-issuer" = "midugh-cluster-issuer"
         }
-    })]
+        tls = [{
+          secretName = "grafana-tls"
+          hosts = [
+            "grafana.local.midugh.fr"
+          ]
+        }]
+      }
+    }
+  })]
 }
