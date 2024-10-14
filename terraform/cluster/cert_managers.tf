@@ -1,9 +1,11 @@
-resource "helm_release" "cert-manager" {
+resource "helm_release" "cert_manager" {
+    count = var.cert_manager.enable ? 1 : 0
+
     chart = "cert-manager"
     repository = "https://charts.jetstack.io"
 
     name = "cert-manager"
-    version = "v1.16.1"
+    version = "v1.14.0"
 
     namespace = kubernetes_namespace.namespaces["cert-manager"].metadata[0].name
 
@@ -11,14 +13,10 @@ resource "helm_release" "cert-manager" {
       name = "crds.enabled"
       value = "true"
     }
-
-    set {
-        name = "prometheus.servicemonitor.enabled"
-        value = "true"
-    }
 }
 
 resource "kubernetes_secret" "cloudflare_secret" {
+    count = var.cert_manager.enable ? 1 : 0
     metadata {
       name = "midugh-cloudflare-secret"
       annotations = local.default_annotations
@@ -32,6 +30,8 @@ resource "kubernetes_secret" "cloudflare_secret" {
 }
 
 resource "kubernetes_manifest" "midugh_cluster_issuer" {
+    count = var.cert_manager.enable ? 1 : 0
+    depends_on = [ helm_release.cert_manager[0] ]
     manifest = {
         "apiVersion" = "cert-manager.io/v1"
         "kind" = "ClusterIssuer"
@@ -49,7 +49,7 @@ resource "kubernetes_manifest" "midugh_cluster_issuer" {
                     "dns01" = {
                         "cloudflare" = {
                             "apiTokenSecretRef" = {
-                                "name" = kubernetes_secret.cloudflare_secret.metadata[0].name
+                                "name" = kubernetes_secret.cloudflare_secret[0].metadata[0].name
                                 "key" = "api-token"
                             }
                         }

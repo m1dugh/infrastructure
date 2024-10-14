@@ -1,11 +1,11 @@
 locals {
-    ingress_controllers = [{
+    ingress_controllers = [for v in [{
         name = "internal-ingress"
         node = "cluster-master-3"
     }, {
         name = "external-ingress"
         node = "cluster-master-2"
-    }]
+    }]: v if var.ingresses.enable]
 }
 
 resource "helm_release" "ingresses" {
