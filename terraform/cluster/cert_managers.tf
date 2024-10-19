@@ -5,14 +5,42 @@ resource "helm_release" "cert_manager" {
   repository = "https://charts.jetstack.io"
 
   name    = "cert-manager"
-  version = "v1.14.0"
+  version = "v1.16.1"
+
+  upgrade_install = true
 
   namespace = kubernetes_namespace.namespaces["cert-manager"].metadata[0].name
 
-  set {
-    name  = "crds.enabled"
-    value = "true"
-  }
+    values = [yamlencode({
+        crds = {
+            enabled = true
+        }
+
+        resources = {
+            requests = {
+                cpu = "10m"
+                memory = "150Mi"
+            }
+        }
+
+        webhook = {
+            resources = {
+                requests = {
+                    cpu = "10m"
+                    memory = "100Mi"
+                }
+            }
+        }
+
+        cainjector = {
+            resources = {
+                requests = {
+                    cpu = "100m"
+                    memory = "100Mi"
+                }
+            }
+        }
+    })]
 }
 
 resource "kubernetes_secret" "cloudflare_secret" {

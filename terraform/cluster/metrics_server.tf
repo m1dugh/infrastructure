@@ -12,4 +12,15 @@ resource "helm_release" "metrics_server" {
   repository = "https://kubernetes-sigs.github.io/metrics-server/"
 
   namespace = "kube-system"
+
+  upgrade_install = true
+
+  values = [yamlencode({
+    resources = {
+        requests = {
+            cpu = "50m"
+            memory = "50Mi"
+        }
+    }
+  })]
 }
