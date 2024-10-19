@@ -24,8 +24,8 @@ resource "helm_release" "pgadmin" {
 
   values = [yamlencode({
     persistentVolume = {
-        storageClass = local.storage_class_name
-        size = "5Gi"
+      storageClass = local.storage_class_name
+      size         = "5Gi"
     }
     ingress = {
       enabled          = true
@@ -33,8 +33,8 @@ resource "helm_release" "pgadmin" {
       hosts = [{
         host = "db.local.midugh.fr"
         paths = [{
-            path = "/"
-            pathType = "Prefix"
+          path     = "/"
+          pathType = "Prefix"
         }]
       }]
       annotations = {

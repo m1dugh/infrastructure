@@ -17,10 +17,10 @@ resource "helm_release" "metrics_server" {
 
   values = [yamlencode({
     resources = {
-        requests = {
-            cpu = "50m"
-            memory = "50Mi"
-        }
+      requests = {
+        cpu    = "50m"
+        memory = "50Mi"
+      }
     }
   })]
 }

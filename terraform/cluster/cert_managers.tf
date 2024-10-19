@@ -11,36 +11,36 @@ resource "helm_release" "cert_manager" {
 
   namespace = kubernetes_namespace.namespaces["cert-manager"].metadata[0].name
 
-    values = [yamlencode({
-        crds = {
-            enabled = true
-        }
+  values = [yamlencode({
+    crds = {
+      enabled = true
+    }
 
-        resources = {
-            requests = {
-                cpu = "10m"
-                memory = "150Mi"
-            }
-        }
+    resources = {
+      requests = {
+        cpu    = "10m"
+        memory = "150Mi"
+      }
+    }
 
-        webhook = {
-            resources = {
-                requests = {
-                    cpu = "10m"
-                    memory = "100Mi"
-                }
-            }
+    webhook = {
+      resources = {
+        requests = {
+          cpu    = "10m"
+          memory = "100Mi"
         }
+      }
+    }
 
-        cainjector = {
-            resources = {
-                requests = {
-                    cpu = "100m"
-                    memory = "100Mi"
-                }
-            }
+    cainjector = {
+      resources = {
+        requests = {
+          cpu    = "100m"
+          memory = "100Mi"
         }
-    })]
+      }
+    }
+  })]
 }
 
 resource "kubernetes_secret" "cloudflare_secret" {
