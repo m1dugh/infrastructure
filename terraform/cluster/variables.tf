@@ -16,6 +16,13 @@ variable "metrics_server" {
   default = {}
 }
 
+variable "database" {
+    type = object({
+        enable = optional(bool, false)
+    })
+    default = {}
+}
+
 variable "ingresses" {
   type = object({
     enable = optional(bool, false)

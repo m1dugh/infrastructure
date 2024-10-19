@@ -1,4 +1,13 @@
-namespaces = ["monitoring", "ingress-controllers", "cert-manager"]
+namespaces = [
+    "monitoring",
+    "ingress-controllers",
+    "cert-manager",
+    "database",
+]
+
+database = {
+    enable = true
+}
 
 metrics_server = {
   enable = true
