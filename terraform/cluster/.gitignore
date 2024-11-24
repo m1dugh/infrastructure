@@ -1,4 +1,4 @@
 /kubernetes.env
-/.terraform/
-/tfplan
-/*.dec.json
+.terraform/
+tfplan
+*.dec.json

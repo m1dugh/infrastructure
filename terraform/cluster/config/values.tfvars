@@ -28,3 +28,7 @@ ingresses = {
 cert_manager = {
   enable = true
 }
+
+minio = {
+  enable = true
+}

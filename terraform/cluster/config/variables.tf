@@ -50,3 +50,10 @@ variable "nfs_provisioner" {
   })
   default = {}
 }
+
+variable "minio" {
+    type = object({
+        enable = optional(bool, false)
+    })
+    default = { }
+}
