@@ -3,10 +3,12 @@ locals {
     name  = "internal-ingress"
     http  = 31080
     https = 31443
+    node  = "cluster-master-2"
     }, {
     name  = "external-ingress"
     http  = 30080
     https = 30443
+    node  = "cluster-master-3"
   }] : v if var.ingresses.enable]
 }
 
@@ -22,6 +24,9 @@ resource "helm_release" "ingresses" {
 
   values = [yamlencode({
     controller = {
+      nodeSelector = {
+        "kubernetes.io/hostname" = each.value.node
+      }
       electionID = "${each.key}-leader"
       service = {
         type = "NodePort"
