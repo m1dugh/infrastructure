@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gateway-apis
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/m1dugh/infrastructure.git
+    targetRevision: HEAD
+    path: apps/gateway-apis
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gateway-apis
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

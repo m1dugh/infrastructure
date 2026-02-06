@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./metallb.yaml
   - ./cert-manager.yaml
+  - ./gateway-apis.yaml
