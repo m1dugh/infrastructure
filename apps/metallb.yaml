@@ -6,11 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://metallb.github.io/metallb
-    chart: metallb
-    targetRevision: v0.15.3
-    helm:
-      releaseName: metallb
+    repoURL: https://github.com/m1dugh/infrastructure.git
+    targetRevision: HEAD
+    path: apps/metallb
   destination:
     server: https://kubernetes.default.svc
     namespace: metallb-system
