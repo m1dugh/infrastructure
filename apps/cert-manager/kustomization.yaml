@@ -1,0 +1,11 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+- name: cert-manager
+  repo: oci://quay.io/jetstack/charts
+  releaseName: cert-manager
+  namespace: cert-manager
+  version: v1.19.2
+  valuesFile: values.yaml
