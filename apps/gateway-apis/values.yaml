@@ -6,3 +6,6 @@ providers:
 
 gateway:
   enabled: false
+
+service:
+  enabled: false
