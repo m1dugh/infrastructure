@@ -11,4 +11,5 @@ helmCharts:
   repo: oci://ghcr.io/nginx/charts/
   name: nginx-gateway-fabric
   namespace: gateway-apis
+  valuesFile: ./values.yaml
   version: 2.4.1

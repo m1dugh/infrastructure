@@ -1,8 +1,0 @@
-nginxGateway:
-  gatewayClassName: nginx-internal
-  gatewayControllerName: gateway.nginx.org/nginx-gateway-controller-internal
-
-nginx:
-  service:
-    type: LoadBalancer
-    loadBalancerIP: 192.168.1.155

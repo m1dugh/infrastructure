@@ -13,13 +13,19 @@ spec:
     protocol: HTTP
     allowedRoutes:
       namespace:
-        from: All
+        from: Selector
+        selector:
+          matchLabels:
+            gateway-access: "true"
   - name: https
     port: 443
     protocol: HTTPS
     allowedRoutes:
       namespace:
-        from: All
+        from: Selector
+        selector:
+          matchLabels:
+            gateway-access: "true"
     hostname: "*.int.midugh.fr"
     tls:
       mode: Terminate

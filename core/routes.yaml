@@ -6,6 +6,7 @@ metadata:
 spec:
   parentRefs:
   - name: nginx-internal
+    namespace: gateway-apis
   hostnames:
   - argocd.int.midugh.fr
   rules:
@@ -15,4 +16,4 @@ spec:
         type: PathPrefix
     backendRefs:
     - name: argocd-server
-      port: 443
+      port: 80
