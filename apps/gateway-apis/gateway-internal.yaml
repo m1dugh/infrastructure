@@ -4,12 +4,24 @@ metadata:
   name: gateway-internal
   annotations:
     metallb.io/loadBalancerIPs: 192.168.1.155
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
 spec:
   gatewayClassName: nginx
   listeners:
   - name: http
     port: 80
     protocol: HTTP
+    allowedRoutes:
+      namespace:
+        from: All
   - name: https
     port: 443
     protocol: HTTPS
+    allowedRoutes:
+      namespace:
+        from: All
+    hostname: "*.int.midugh.fr"
+    tls:
+      mode: Terminate
+      certificateRefs: 
+      - name: int-midugh-fr-tls
