@@ -10,14 +10,12 @@ spec:
   - name: http
     port: 80
     protocol: HTTP
-    nodePort: 30080
     allowedRoutes:
       namespaces:
         from: All
   - name: https
     port: 443
     protocol: HTTPS
-    nodePort: 30443
     allowedRoutes:
       namespaces:
         from: All
@@ -29,7 +27,6 @@ spec:
   - name: https-root
     port: 443
     protocol: HTTPS
-    nodePort: 30443
     allowedRoutes:
       namespaces:
         from: All
