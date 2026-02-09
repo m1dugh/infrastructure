@@ -1,11 +1,3 @@
-providers:
-  kubernetesIngress:
-    enabled: false
-  kubernetesGateway:
-    enabled: true
-
-gateway:
-  enabled: false
-
-service:
-  enabled: false
+nginx:
+  service:
+    type: NodePort

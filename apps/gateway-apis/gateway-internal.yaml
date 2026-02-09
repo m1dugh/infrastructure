@@ -5,19 +5,19 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-issuer
 spec:
-  gatewayClassName: traefik
+  gatewayClassName: nginx
   listeners:
   - name: http
     port: 80
     protocol: HTTP
     allowedRoutes:
-      namespace:
+      namespaces:
         from: All
   - name: https
     port: 443
     protocol: HTTPS
     allowedRoutes:
-      namespace:
+      namespaces:
         from: All
     hostname: "*.int.midugh.fr"
     tls:
