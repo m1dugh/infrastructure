@@ -5,6 +5,7 @@ resources:
 # - "https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.4.1/deploy/crds.yaml"
 # - "https://github.com/nginx/nginx-gateway-fabric/config/crd/gateway-api/standard?ref=v2.4.0"
 - ./gateway-internal.yaml
+- ./gateway-external.yaml
 
 helmCharts:
 - releaseName: nginx-gateway-fabric
