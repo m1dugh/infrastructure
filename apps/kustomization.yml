@@ -6,3 +6,4 @@ resources:
   - ./cert-manager.yaml
   - ./gateway-apis.yaml
   - ./monitoring.yaml
+  - ./nfs-provisionner.yaml

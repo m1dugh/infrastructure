@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-provisionner
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/m1dugh/infrastructure.git
+    targetRevision: HEAD
+    path: apps/nfs-provisionner
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: infrastructure
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
