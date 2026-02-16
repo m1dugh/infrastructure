@@ -14,6 +14,16 @@ spec:
       valuesObject:
         persistentVolume:
           storageClass: nfs-client
+        httpRoute:
+          enabled: true
+          hostnames:
+          - postgres.int.midugh.fr
+          parentRefs:
+          - group: gateway.networking.k8s.io
+            kind: Gateway
+            name: gateway-internal
+            namespace: gateway-apis
+            sectionName: https 
   destination:
     server: https://kubernetes.default.svc
     namespace: infrastructure
