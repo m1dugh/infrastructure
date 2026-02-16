@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pgadmin
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://helm.runix.net 
+    chart: pgadmin4
+    targetRevision: 1.59.0
+    helm:
+      releaseName: "pgadmin"
+      valuesObject:
+        persistentVolume:
+          storageClass: nfs-client
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: infrastructure
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -8,3 +8,4 @@ resources:
   - ./monitoring.yaml
   - ./nfs-provisionner.yaml
   - ./postgresql.yaml
+  - ./pgadmin.yaml
