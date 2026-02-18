@@ -1,0 +1,39 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: redis-insight-tls
+  namespace: infrastructure
+spec:
+  parentRefs:
+  - name: gateway-internal
+    namespace: gateway-apis
+    sectionName: http
+  hostnames:
+  - redis.int.midugh.fr
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        statusCode: 301
+--- 
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: redis-insight
+  namespace: infrastructure
+spec:
+  parentRefs:
+  - name: gateway-internal
+    namespace: gateway-apis
+    sectionName: https
+  hostnames:
+  - redis.int.midugh.fr
+  rules:
+  - matches:
+    - path:
+        value: /
+        type: PathPrefix
+    backendRefs:
+    - name: redis-insight-redisinsight
+      port: 5000

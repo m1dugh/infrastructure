@@ -6,19 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://heywood8.github.io/helm-charts
-    chart: redisinsight
-    targetRevision: 0.4.5
-    helm:
-      releaseName: redis-insight
-      valuesObject:
-        persistentVolumeClaim:
-          storageClassName: nfs-client
+    repoURL: https://github.com/m1dugh/infrastructure.git
+    targetRevision: HEAD
+    path: apps/redis-insight
   destination:
     server: https://kubernetes.default.svc
     namespace: infrastructure
   syncPolicy:
-    automated:
-      enabled: false
     syncOptions:
       - CreateNamespace=true
