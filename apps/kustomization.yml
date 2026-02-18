@@ -9,3 +9,5 @@ resources:
   - ./nfs-provisionner.yaml
   - ./postgresql.yaml
   - ./pgadmin.yaml
+  - ./redis.yaml
+  - ./redis-insight.yaml
