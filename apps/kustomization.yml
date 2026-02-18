@@ -10,4 +10,4 @@ resources:
   - ./postgresql.yaml
   - ./pgadmin.yaml
   - ./redis.yaml
-  - ./redis-insight.yaml
+  # - ./redis-insight.yaml
