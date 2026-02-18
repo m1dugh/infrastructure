@@ -19,8 +19,6 @@ spec:
     namespace: infrastructure
   syncPolicy:
     automated:
-      enabled: true
-      prune: true
-      selfHeal: true
+      enabled: false
     syncOptions:
       - CreateNamespace=true
